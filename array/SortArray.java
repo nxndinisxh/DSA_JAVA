@@ -44,12 +44,14 @@ public class SortArray {
 
         return arr;
     }
+    
     void display(int arr[]) {
         for(int i:arr) {
             System.out.print(i + "\t");
         }
         System.out.println();
     }
+
     public static void main(String[] args) {
         SortArray obj = new SortArray();
         Scanner sc = new Scanner(System.in);

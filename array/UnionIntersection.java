@@ -25,15 +25,71 @@ public class UnionIntersection {
         return arr;
     }
 
-    int[] union(int arr1[], int[] arr2) {
+    int[] findUnion(int arr1[], int[] arr2) {
         int n = 0;
-        int iterations = arr1.length > arr2.length ? arr1.length : arr2.length;
-        for(int  i=0; i < iterations; i++) {
-            for(int j = 0; j <  )
+        int i = 0, j = 0, k=0;
+        int[] union = new int[arr1.length + arr2.length];
+        while(i < arr1.length && j < arr2.length) {
+            if(arr1[i] < arr2[j]) {
+                union[k] = arr1[i];
+                n++; i++; k++;
+            } else if(arr1[i] > arr2[j]) {
+                union[k] = arr2[j];
+                j++; 
+                k++;
+                n++;
+            } else {
+                union[k] = arr1[i];
+                n++;
+                i++;
+                j++;
+                k++;                 
+            }
         }
 
-        int[] union = new int[n];
-        return union;
+        while(j < arr2.length) {
+            union[k] = arr2[j];
+            j++;
+            k++;
+            n++;
+        }
+        
+        while(i < arr1.length) {
+            union[k] = arr1[i];
+            i++;
+            k++;
+            n++;
+        }
+        
+
+        int[] Union = new int[n];
+        for(int p = 0 ; p < n; p++) 
+            Union[p] = union[p];
+
+        return Union;
+    }
+
+    int[] findIntersection(int arr1[], int arr2[]) {
+        int n = 0;
+        int[] intersection = new  int[arr1.length < arr2.length ? arr1.length : arr2.length];
+        int  i = 0, j = 0, k = 0;
+        while(i < arr1.length && j < arr2.length) {
+            if(arr1[i] == arr2[j]) {
+                intersection[k] = arr1[i];
+                i++; j++; k++; n++;
+            } else if(arr1[i] < arr2[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        int[] Intersection = new int[n];
+        for(int p = 0; p < n; p++) {
+            Intersection[p] = intersection[p];
+        }
+
+        return Intersection;
     }
 
     public static void main(String[] args) {
@@ -69,13 +125,15 @@ public class UnionIntersection {
         ob.bubbleSort(arr1);
         ob.bubbleSort(arr2);
 
-        int[] union = ob.union(arr1, arr2);
-        int[] intersection = ob.intersection(arr1, arr2);
+        int[] union = ob.findUnion(arr1, arr2);
+        int[] intersection = ob.findIntersection(arr1, arr2);
 
         System.out.println("\nUnion Array: ");
         ob.display(union);
 
         System.out.println("\nIntersection Array: ");
         ob.display(intersection);
+
+        sc.close();
     }
 }
